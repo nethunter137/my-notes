@@ -19,7 +19,7 @@ void main() {
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      "/notes/": (context) => const Notesview(),
+      noteRoute: (context) => const Notesview(),
     },
   ));
 }
