@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes2/services/auth/auth_exceptions.dart';
+import 'package:mynotes2/services/auth/auth_service.dart';
 import 'package:mynotes2/ultilities/show_error_dialogs.dart';
 import 'dart:developer' as devtools show log;
 import 'package:mynotes2/views/routes.dart';
@@ -60,8 +61,7 @@ class _LoginViewState extends State<LoginView> {
             final email = _email.text;
             final password = _password.text;
             try {
-              final userCredential =
-                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+              final userCredential = await AuthService.firebase().logIn(
                 email: email,
                 password: password,
               );
@@ -70,16 +70,14 @@ class _LoginViewState extends State<LoginView> {
                 (route) => false,
               );
               devtools.log(userCredential.toString());
-            } on FirebaseAuthException catch (e) {
-              if (e.code == 'user-not-found') {
-                await showErrorDialog(context, "user not found");
-                devtools.log('User not found');
-              } else if (e.code == 'wrong-password') {
-                await showErrorDialog(context, "wrong password");
-                devtools.log('Wrong password');
-              } else {
-                await showErrorDialog(context, 'Error: ${e.code}');
-              }
+            } on UserNotFoundAuthException {
+              await showErrorDialog(context, "user not found");
+              devtools.log('User not found');
+            } on WrongPasswordAuthException {
+              await showErrorDialog(context, "wrong password");
+              devtools.log('Wrong password');
+            } on GenericAuthException {
+              await showErrorDialog(context, 'Authentication Error');
             } catch (e) {
               await showErrorDialog(context, 'Error: ${e.toString}');
             }

@@ -2,10 +2,12 @@ import 'package:mynotes2/services/auth/auth_provider.dart';
 import 'package:mynotes2/services/auth/auth_user.dart';
 import 'package:mynotes2/services/auth/firebase_auth_provider.dart';
 
-//create a skeleton of a authService using authProvider properties.
+//create a authService skeleton using other properties PLUS authProvider properties and tied it altogether.
 class AuthService implements AuthProvider {
   final AuthProvider provider;
   const AuthService(this.provider);
+
+  factory AuthService.firebase() => AuthService(FireBaseAuthProvider());
 
   @override
   Future<AuthUser> createUser({
@@ -35,4 +37,7 @@ class AuthService implements AuthProvider {
 
   @override
   Future<void> sendEmailVerification() => provider.sendEmailVerification();
+
+  @override
+  Future<void> initialize() => provider.initialize();
 }
