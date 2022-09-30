@@ -2,6 +2,8 @@ import 'package:mynotes2/services/auth/auth_provider.dart';
 import 'package:mynotes2/services/auth/auth_user.dart';
 import 'package:mynotes2/services/auth/firebase_auth_provider.dart';
 
+//LAST STEP
+
 //create a authService skeleton using other properties PLUS authProvider properties and tied it altogether.
 class AuthService implements AuthProvider {
   final AuthProvider provider;
@@ -22,6 +24,9 @@ class AuthService implements AuthProvider {
   @override
   AuthUser? get currentUser => provider.currentUser;
 
+  //create a class that take 1 object of a list then return that
+  //list into an individual object (in this case, two
+  //objects [email and password seperately])
   @override
   Future<AuthUser> logIn({
     required String email,

@@ -6,7 +6,9 @@ import 'package:mynotes2/services/auth/auth_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, FirebaseAuthException;
 
-//implements logics into those classes that you just created.
+//THIRD STEP
+
+//implements firebase logics into those classes that you just created.
 class FireBaseAuthProvider implements AuthProvider {
   @override
   Future<AuthUser> createUser({
