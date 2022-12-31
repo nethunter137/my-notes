@@ -18,7 +18,7 @@ void main() {
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      noteRoute: (context) => const Notesview(),
+      noteRoute: (context) => const NotesView(),
       newNoteRoute: (context) => const NewNoteView(),
     },
   ));
@@ -47,7 +47,7 @@ class Homepage extends StatelessWidget {
             //   return const LoginView();
             // }
             if (user != null) {
-              return const Notesview();
+              return const NotesView();
             }
             return const LoginView();
           default:
